@@ -5,23 +5,23 @@
  */
 (function () {
     // 得到元素
-    var carousel_list = document.getElementById('carousel_list');
-    var left_btn = document.getElementById('left_btn');
-    var right_btn = document.getElementById('right_btn');
-    var circle_ol = document.getElementById('circle_ol');
-    var banner = document.getElementById('banner');
-    var circle_lis = circle_ol.getElementsByTagName('li');
+    let carousel_list = document.getElementById('carousel_list');
+    let left_btn = document.getElementById('left_btn');
+    let right_btn = document.getElementById('right_btn');
+    let circle_ol = document.getElementById('circle_ol');
+    let banner = document.getElementById('banner');
+    let circle_lis = circle_ol.getElementsByTagName('li');
 
     // 克隆第一张li
-    var clone_li = carousel_list.firstElementChild.cloneNode(true);
+    let clone_li = carousel_list.firstElementChild.cloneNode(true);
     // 上树
     carousel_list.appendChild(clone_li);
 
     // 当前正在显示的图片序号，从0开始
-    var idx = 0;
+    let idx = 0;
 
     // 节流锁
-    var lock = true;
+    let lock = true;
 
     // 右按钮事件监听
     right_btn.onclick = right_btn_handler;
@@ -66,7 +66,7 @@
         lock = false;
 
         // 左按钮很特殊，要先写if语句，而不是idx--。
-        if (idx == 0) {
+        if (idx === 0) {
             // 瞬间拉动到最后
             carousel_list.style.transition = 'none';
             // 拉到最后（瞬间移动）
@@ -99,7 +99,7 @@
     // 设置小圆点的current在谁身上，序号为idx的小圆点才有current类名，其他的li都没有类名
     function setCircles() {
         // 遍历，遍历0、1、2、3、4。每遍历一个数字，都要和idx比一下，如果相等，就把这项设置类名为current，否则去掉类名。
-        for (var i = 0; i <= 4; i++) {
+        for (let i = 0; i <= 4; i++) {
             // 这里的%5非常巧妙，0、1、2、3、4除以5的余数都是它本身，但是5除以5等于0了。
             // 这里%5的目的就是为了右按钮它有一瞬间，idx会成为5，500毫秒之后才变为0。
             if (i == idx % 5) {
@@ -112,9 +112,9 @@
 
     // 事件委托，小圆点的监听
     circle_ol.onclick = function (e) {
-        if (e.target.tagName.toLowerCase() == 'li') {
+        if (e.target.tagName.toLowerCase() === 'li') {
             // 得到li身上的data-n属性，就是n
-            var n = Number(e.target.getAttribute('data-n'));
+            let n = Number(e.target.getAttribute('data-n'));
             // 改变idx
             idx = n;
             // 拉动
@@ -125,7 +125,7 @@
     }
 
     // 定时器，自动轮播
-    var timer = setInterval(right_btn_handler, 2000);
+    let timer = setInterval(right_btn_handler, 2000);
 
     // 鼠标进入，自动轮播暂停
     banner.onmouseenter = function () {
@@ -136,7 +136,7 @@
     banner.onmouseleave = function () {
         // 设表先关
         clearInterval(timer);
-        // 设置定时器，这里不要加var，加var就变为局部变量了，就clear不掉了！
+        // 设置定时器，这里不要加let，加let就变为局部变量了，就clear不掉了！
         timer = setInterval(right_btn_handler, 2000);
     }
 })();

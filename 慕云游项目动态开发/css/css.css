@@ -966,18 +966,22 @@ footer .copyrights {
 footer .copyrights a {
     color: white;
 }
-.backtotop {
+
+/*
+https://www.runoob.com/css/css-positioning.html
+*/
+.backtop {
     position: fixed;
     bottom: 80px;
     right: 80px;
     width: 80px;
     height: 80px;
-    background: #ccc;
+    background: #a5bb2a;
     font-size: 20px;
     text-align: center;
     padding-top: 12px;
     box-sizing: border-box;
-    color: #000;
-    /* 隐藏元素 */
+    color: #000000;
     display: none;
+
 }
